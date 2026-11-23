@@ -2,7 +2,7 @@
 
 FPL 的 DeepSeek Harness 插件联合开发工作区：集中维护架构、Agent 开发规则、插件版本组合和联动验收，各插件保留独立仓库与发布能力。
 
-当前只有 `dsh-core` 的文档脚手架，尚未实现公共能力或业务联动。此仓库不包含完整 FPL，也不要求本机存在 FPL 源码。
+`dsh-core` 独立提供公共模型、Agent、本地模型、任务与资源服务及 FPL 看板。DSH 通过可选连接层接入，业务状态由独立服务持有。后续 `dsh-plugin-*` 应用在这里联合维护，通过公开服务组合这些能力。
 
 ## 获取与初始化
 
@@ -27,9 +27,9 @@ python3 scripts/workspace.py check
 
 | 插件 | 仓库 | 当前状态与职责 |
 | --- | --- | --- |
-| dsh-core | [dsh-plugin-fpl/dsh-core](https://github.com/dsh-plugin-fpl/dsh-core) | 文档初始化；规划中的公共配置、能力适配与应用接入底座 |
+| dsh-core | [dsh-plugin-fpl/dsh-core](https://github.com/dsh-plugin-fpl/dsh-core) | 独立公共服务与 FPL 看板，包含模型、五种 Agent、本地模型、任务与资源；DSH 保留连接层 |
 
-未来插件按需增加，不能将此表中的规划视为已可调用的接口。
+新增应用按 [插件接入流程](docs/adding-plugins.md) 登记，整套版本由总仓库固定。
 
 ## 整套开发入口
 
@@ -39,6 +39,6 @@ python3 scripts/workspace.py check
 - [开发流程](docs/development.md)：分支、跨仓库提交、版本更新与恢复。
 - [新增插件](docs/adding-plugins.md)：新仓库接入与最低验收要求。
 - [决策记录](docs/decisions.md)：工作区边界及工具行为的原因。
-- [联动验收目录](tests/integration/README.md)：后续业务验收的落点，目前没有业务联动实现。
+- [联动验收目录](tests/integration/README.md)：整套能力与后续应用交接的验收入口。
 
-临时验收输出放已忽略的 `.local/`，持久本地运行状态放 `.runtime/`，凭据与真实数据不入库。仓库公开不等于已授予开源许可；许可证待所有者明确选择。
+临时验收输出放 `.local/`，持久本地运行状态放 `.runtime/`。从 [dsh-core 使用说明](dsh-core/README.md) 开始配置和接入。

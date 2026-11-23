@@ -46,6 +46,10 @@ class WorkspaceTests(unittest.TestCase):
         for name, content in (("README.md", "# Plugin\n"), ("AGENTS.md", "Rules\n"),
                               (".gitignore", ".local/\n")):
             (self.plugin / name).write_text(content)
+        docs = self.plugin / "docs"
+        docs.mkdir()
+        for name in ("api.md", "scope.md", "verification.md"):
+            (docs / name).write_text("# Public plugin documentation\n")
         self.commit(self.plugin)
         self.root = self.base / "workspace"
         self.init(self.root)

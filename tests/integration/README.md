@@ -38,3 +38,13 @@
 最终页面复核 `.local/workshops-accounts/1795443391996778000/` 等待真实富文本编辑器和剪辑时间线加载，Core `/account` 账号管理可见；七个页面 errors/failed 均为空。
 
 六份服务归档均在开发目录外全新解包并安装自己的锁定 Python 环境，独立启动、界面与图标回退通过，证据 `.local/four-workshops-releases/1795443533491971000/`。正式 Core 已通过正常启动器升级到 0.4；六工坊使用正常 init/connect-core/start 部署在 9360–9365。更新前确认 Core 无在途任务，按影响范围保留配置、凭据及元数据库恢复点；更新后公开 SSO 核对原视觉 1 个项目保留、剪辑 0 项目保留、新四工坊为空，六个头像与 Core ready 目录通过。正式结果在 Core `.runtime/four-workshops-transition/formal-result.json`。Core 原有另一项未提交界面调整保留在 main 工作树及 stash，不并入本次迁移提交。
+
+
+最终交付复核：从 GitHub 全新递归克隆检查七个固定版本可达；四个新应用各自锁定安装、TypeScript/Vite、Python 和 Node 测试通过，视觉/剪辑全新安装亦通过。编译器构建脚本限定锁定版本，原生 watcher 保持禁用。桌面 Core 0.4 与六工坊已安装启用，中文名称和应用头像正确，公开 ConfigEditor 完成各自 endpoint/credentialFile 配置，临时助手已卸载；关闭 DSH 时 9310 和 9360–9365 均继续 ready。
+
+最终 Core 212 项 Python、9 项连接/目录投影；思绪 89 项 Python，其余工坊计数不变。新增无浏览器 cookie 的实际插件凭据读取进入公开七进程验收，全部通过，证据 `.local/workshops-accounts/1795446055115708000/`。服务和 DSH 双重登记统一投影为一张 ready 应用卡片，保留旧详情路径。
+
+Galgame 最终 68 项 Python 通过；完整 WAV → 实时模型设置 → Core 持久 ASR → 文本/分段回执已加入正式组合脚本，最终七进程全部通过，证据 `.local/workshops-accounts/1795446672061005000/`。
+
+
+写作流最终复核：思绪 93 项 Python 与 3 项 Node 通过。七进程验收在 Core 确定性夹具中显式设置 1 秒分块间隔，首段 SSE 到达时真实 Core 任务仍运行；关闭消费者后持久任务变为 cancelled。完整知识库、社区授权、官方导入、飞书、Galgame/录音 ASR 和 FFmpeg 交接再次全部通过，证据 `.local/workshops-accounts/1795447307265892000/`。

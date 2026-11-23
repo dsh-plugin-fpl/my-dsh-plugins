@@ -81,6 +81,25 @@ try {
       path: task + "/" + slug + "-editor-narrow.png",
       fullPage: true,
     });
+    if (route === "visual-workshop") {
+      await page.setViewportSize({ width: 1440, height: 960 });
+      await page.getByRole("tab", { name: "白模预演", exact: true }).click();
+      await page
+        .getByRole("textbox", { name: "场景名称", exact: true })
+        .fill("独立三维编辑验收");
+      await page
+        .getByRole("button", { name: "新建预演场景", exact: true })
+        .click();
+      await page
+        .locator(".visual-previs-library canvas")
+        .first()
+        .waitFor({ state: "visible", timeout: 30000 });
+      await page.waitForTimeout(2000);
+      await page.screenshot({
+        path: task + "/" + slug + "-previs-editor.png",
+        fullPage: true,
+      });
+    }
     result.push({ slug, errors, failed, created_project: true });
     await context.close();
   }

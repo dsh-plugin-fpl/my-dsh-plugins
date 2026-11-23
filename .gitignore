@@ -1,0 +1,17 @@
+# Regenerable local output and persistent local runtime
+.local/
+.runtime/
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+# Language and editor output
+__pycache__/
+*.py[cod]
+.venv/
+node_modules/
+dist/
+coverage/
+.DS_Store

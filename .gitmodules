@@ -1,0 +1,3 @@
+[submodule "dsh-core"]
+	path = dsh-core
+	url = https://github.com/dsh-plugin-fpl/dsh-core.git

@@ -2,7 +2,7 @@
 
 FPL 的 DeepSeek Harness 插件联合开发工作区：集中维护架构、Agent 开发规则、插件版本组合和联动验收，各插件保留独立仓库与发布能力。
 
-`dsh-core` 独立提供公共模型、Agent、本地模型、任务与资源服务及 FPL 看板。DSH 通过可选连接层接入，业务状态由独立服务持有。视觉创作工坊与视频剪辑工坊各自提供独立服务，通过公开 Core 协议与受限工坊交接组合能力。
+`dsh-core` 独立提供公共模型、Agent、本地模型、任务与资源服务及 FPL 看板。DSH 通过可选连接层接入，业务状态由独立服务持有。六个工坊各自提供独立服务，通过公开 Core 协议与受限工坊交接组合能力。
 
 ## 获取与初始化
 
@@ -30,6 +30,10 @@ python3 scripts/workspace.py check
 | dsh-core | [dsh-plugin-fpl/dsh-core](https://github.com/dsh-plugin-fpl/dsh-core) | 独立公共服务与 FPL 看板，包含模型、五种 Agent、本地模型、任务与资源；DSH 保留连接层 |
 | dsh-visual-workshop | [dsh-plugin-fpl/dsh-visual-workshop](https://github.com/dsh-plugin-fpl/dsh-visual-workshop) | 视觉创作工坊独立服务与原 FPL 界面，画布、设定、分镜、三维预演和 Core 生成；DSH 提供登记与工具 |
 | dsh-video-editor | [dsh-plugin-fpl/dsh-video-editor](https://github.com/dsh-plugin-fpl/dsh-video-editor) | 视频剪辑独立服务与原时间线界面，素材处理、FFmpeg 预览/导出、片段交接；DSH 提供登记与工具 |
+| dsh-presentation-workshop | [dsh-plugin-fpl/dsh-presentation-workshop](https://github.com/dsh-plugin-fpl/dsh-presentation-workshop) | 演示工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9362 |
+| dsh-thought-workshop | [dsh-plugin-fpl/dsh-thought-workshop](https://github.com/dsh-plugin-fpl/dsh-thought-workshop) | 思绪工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9363 |
+| dsh-galgame-workshop | [dsh-plugin-fpl/dsh-galgame-workshop](https://github.com/dsh-plugin-fpl/dsh-galgame-workshop) | Galgame 工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9364 |
+| dsh-audio-annotation | [dsh-plugin-fpl/dsh-audio-annotation](https://github.com/dsh-plugin-fpl/dsh-audio-annotation) | 录音标注工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9365 |
 
 新增应用按 [插件接入流程](docs/adding-plugins.md) 登记，整套版本由总仓库固定。
 
@@ -47,6 +51,15 @@ python3 scripts/workspace.py check
 
 ## 工坊运行与验收
 
-分别按 [视觉工坊](dsh-visual-workshop/README.md) 与 [剪辑工坊](dsh-video-editor/README.md) 安装自身环境，运行各自 `node scripts/application.mjs start` 和 `open`。默认监听 9360 / 9361，Core 使用 9310；DSH 插件只连接服务。首次使用为空配置，旧 FPL 数据不自动迁入。
+六个工坊分别在自己的目录 `pnpm setup`，按各自 README 的 `connect-core` 步骤连接 Core 0.4 统一账号，再 `pnpm start` / `pnpm open`。Core 9310，视觉 9360、剪辑 9361、演示 9362、思绪 9363、Galgame 9364、录音标注 9365。新四应用首次为空，原 FPL 数据不自动迁入；思绪官方内容须管理员显式导入。关闭 DSH 不停止服务。
 
-三服务与打包安装验收：先构建三个插件 tarball，再运行 `dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py`。需要 DSH CLI、FFmpeg 和 Chrome；使用 19310 / 19360 / 19361 / 19362 隔离端口，报告与截图位于 `.local/workshops-integration/`。详见 [联动验收](tests/integration/README.md)。
+完整组合先构建 Core 和六个应用的插件 tarball，安装自身环境，再执行：
+
+```sh
+WORKSHOPS_UI_SCRIPT="$PWD/scripts/verify-workshops-accounts-ui.mjs" \
+WORKSHOPS_HARNESS_SCRIPT="$PWD/scripts/verify-workshops-accounts-harness.mjs" \
+WORKSHOPS_WORKSPACE="$PWD" \
+dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops_accounts.py
+```
+
+需要 DSH CLI、FFmpeg 和 Chrome；使用 19310、19362–19368 隔离端口，证据在 `.local/workshops-accounts/`。脚本仅使用提供方公开 CLI、HTTP/WS 与文档化测试夹具。详见 [联动验收](tests/integration/README.md)。

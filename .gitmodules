@@ -7,3 +7,19 @@
 [submodule "dsh-video-editor"]
 	path = dsh-video-editor
 	url = https://github.com/dsh-plugin-fpl/dsh-video-editor.git
+[submodule "dsh-presentation-workshop"]
+	path = dsh-presentation-workshop
+	url = https://github.com/dsh-plugin-fpl/dsh-presentation-workshop.git
+	branch = main
+[submodule "dsh-thought-workshop"]
+	path = dsh-thought-workshop
+	url = https://github.com/dsh-plugin-fpl/dsh-thought-workshop.git
+	branch = main
+[submodule "dsh-galgame-workshop"]
+	path = dsh-galgame-workshop
+	url = https://github.com/dsh-plugin-fpl/dsh-galgame-workshop.git
+	branch = main
+[submodule "dsh-audio-annotation"]
+	path = dsh-audio-annotation
+	url = https://github.com/dsh-plugin-fpl/dsh-audio-annotation.git
+	branch = main

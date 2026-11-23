@@ -25,3 +25,16 @@
 启动器新增隔离延迟退出进程回归，验证 stop 等待原 PID 真正退出，连续 start 不会误认旧进程。最新服务归档逐文件核对启动器、归档脚本、插件清单、locale 与验证文档，内容与已推送源码一致。同期桌面安装任务对头像及插件说明的工作树改动予以保留，不并入本次提交。
 
 三维延迟加载补测通过：在独立视觉服务中新建项目、切换白模预演、创建场景并载入真实 Vue/Three 编辑器，canvas 可见，两个应用均无 pageerror 或 HTTP 失败。证据 `.local/workshops-integration/1795432149747640000/`，含 `dsh-visual-workshop-previs-editor.png`；对应步骤已纳入正式浏览器组合脚本。第三方模型格式与复杂场景负载仍不由此单一场景替代。
+
+
+## 2026-11-23：Core 0.4 与六工坊
+
+新入口 `scripts/verify_workshops_accounts.py` 通过七个真实进程和提供方文档化的 Core fixture 验收统一账号、私人隔离、原生导出、思绪知识/社区逐篇授权/官方导入/写作/飞书闭环、Galgame 剧情、录音 WAV/ASR、Core 跨应用授权及真实 FFmpeg 片段交接。模型和飞书仅替换网络响应，任务、资源、WebSocket、状态和恢复代码实际运行。
+
+设置 WORKSHOPS_UI_SCRIPT 和 WORKSHOPS_HARNESS_SCRIPT 为 README 中的两个脚本可加入 Chrome 与真实 tarball 安装验收。七份 tarball 在专用 profile 安装后六应用 ready；退出 Harness 后各独立服务仍就绪。证据 `.local/workshops-accounts/1795443042516017000/`，不含正式账号和旧业务数据。真实供应商/飞书账号付费执行及公网部署未测试。
+
+各仓库 Python 回归：演示 56、思绪 88、Galgame 67、录音 5、视觉 18、剪辑 9；各应用 3 项 Node；Core 211 项 Python、8 项连接测试，原 2 个 Chrome 完整场景通过。界面额外检查六工坊与账号管理的明暗、宽窄屏与独立头像。
+
+最终页面复核 `.local/workshops-accounts/1795443391996778000/` 等待真实富文本编辑器和剪辑时间线加载，Core `/account` 账号管理可见；七个页面 errors/failed 均为空。
+
+六份服务归档均在开发目录外全新解包并安装自己的锁定 Python 环境，独立启动、界面与图标回退通过，证据 `.local/four-workshops-releases/1795443533491971000/`。正式 Core 已通过正常启动器升级到 0.4；六工坊使用正常 init/connect-core/start 部署在 9360–9365。更新前确认 Core 无在途任务，按影响范围保留配置、凭据及元数据库恢复点；更新后公开 SSO 核对原视觉 1 个项目保留、剪辑 0 项目保留、新四工坊为空，六个头像与 Core ready 目录通过。正式结果在 Core `.runtime/four-workshops-transition/formal-result.json`。Core 原有另一项未提交界面调整保留在 main 工作树及 stash，不并入本次迁移提交。

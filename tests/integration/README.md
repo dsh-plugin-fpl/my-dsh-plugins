@@ -48,3 +48,6 @@ Galgame 最终 68 项 Python 通过；完整 WAV → 实时模型设置 → Core
 
 
 写作流最终复核：思绪 93 项 Python 与 3 项 Node 通过。七进程验收在 Core 确定性夹具中显式设置 1 秒分块间隔，首段 SSE 到达时真实 Core 任务仍运行；关闭消费者后持久任务变为 cancelled。完整知识库、社区授权、官方导入、飞书、Galgame/录音 ASR 和 FFmpeg 交接再次全部通过，证据 `.local/workshops-accounts/1795447307265892000/`。
+
+
+最终远端复核：Core 全新克隆的锁定安装、完整连接器/看板构建、9 项 Node（空 Python 字节码缓存）、公开调用方独立编译通过；思绪 93 与 Galgame 68 项 Python 在最终远端组合再次通过。正式 Chrome `/apps` 实测恰有六张唯一 ready 应用卡片，六个头像完整加载、页面标题为“未来道具研究所”、无页面错误；证据 Core `.runtime/four-workshops-transition/final-cards-result.json` 与 `final-six-cards.png`。

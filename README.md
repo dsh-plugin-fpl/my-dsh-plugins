@@ -63,3 +63,7 @@ dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops_accounts.py
 ```
 
 需要 DSH CLI、FFmpeg 和 Chrome；使用 19310、19362–19368 隔离端口，证据在 `.local/workshops-accounts/`。脚本仅使用提供方公开 CLI、HTTP/WS 与文档化测试夹具。详见 [联动验收](tests/integration/README.md)。
+
+## 统一存储
+
+在 Core 看板顶部“存储”中设置统一数据根目录。默认建议 `~/Library/Application Support/DSH-FPL`；Core 与六工坊按自己的子目录保存数据，代码和运行环境仍由安装目录管理。已有数据通过预检、显式迁移和可恢复切换导入，原目录保留。旧 FPL 来源必须另外明确登记和选择，不会因新安装自动导入。参见 [Core 存储与迁移](dsh-core/docs/storage.md)。DSH 插件显示名称统一采用 `dsh-fpl-` 前缀，仓库、包 ID 与稳定应用 ID 保持兼容。

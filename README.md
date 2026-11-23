@@ -2,7 +2,7 @@
 
 FPL 的 DeepSeek Harness 插件联合开发工作区：集中维护架构、Agent 开发规则、插件版本组合和联动验收，各插件保留独立仓库与发布能力。
 
-`dsh-core` 独立提供公共模型、Agent、本地模型、任务与资源服务及 FPL 看板。DSH 通过可选连接层接入，业务状态由独立服务持有。后续 `dsh-plugin-*` 应用在这里联合维护，通过公开服务组合这些能力。
+`dsh-core` 独立提供公共模型、Agent、本地模型、任务与资源服务及 FPL 看板。DSH 通过可选连接层接入，业务状态由独立服务持有。视觉创作工坊与视频剪辑工坊各自提供独立服务，通过公开 Core 协议与受限工坊交接组合能力。
 
 ## 获取与初始化
 
@@ -28,6 +28,8 @@ python3 scripts/workspace.py check
 | 插件 | 仓库 | 当前状态与职责 |
 | --- | --- | --- |
 | dsh-core | [dsh-plugin-fpl/dsh-core](https://github.com/dsh-plugin-fpl/dsh-core) | 独立公共服务与 FPL 看板，包含模型、五种 Agent、本地模型、任务与资源；DSH 保留连接层 |
+| dsh-visual-workshop | [dsh-plugin-fpl/dsh-visual-workshop](https://github.com/dsh-plugin-fpl/dsh-visual-workshop) | 视觉创作工坊独立服务与原 FPL 界面，画布、设定、分镜、三维预演和 Core 生成；DSH 提供登记与工具 |
+| dsh-video-editor | [dsh-plugin-fpl/dsh-video-editor](https://github.com/dsh-plugin-fpl/dsh-video-editor) | 视频剪辑独立服务与原时间线界面，素材处理、FFmpeg 预览/导出、片段交接；DSH 提供登记与工具 |
 
 新增应用按 [插件接入流程](docs/adding-plugins.md) 登记，整套版本由总仓库固定。
 
@@ -42,3 +44,9 @@ python3 scripts/workspace.py check
 - [联动验收目录](tests/integration/README.md)：整套能力与后续应用交接的验收入口。
 
 临时验收输出放 `.local/`，持久本地运行状态放 `.runtime/`。从 [dsh-core 使用说明](dsh-core/README.md) 开始配置和接入。
+
+## 工坊运行与验收
+
+分别按 [视觉工坊](dsh-visual-workshop/README.md) 与 [剪辑工坊](dsh-video-editor/README.md) 安装自身环境，运行各自 `node scripts/application.mjs start` 和 `open`。默认监听 9360 / 9361，Core 使用 9310；DSH 插件只连接服务。首次使用为空配置，旧 FPL 数据不自动迁入。
+
+三服务与打包安装验收：先构建三个插件 tarball，再运行 `dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py`。需要 DSH CLI、FFmpeg 和 Chrome；使用 19310 / 19360 / 19361 / 19362 隔离端口，报告与截图位于 `.local/workshops-integration/`。详见 [联动验收](tests/integration/README.md)。

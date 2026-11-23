@@ -1,3 +1,9 @@
 [submodule "dsh-core"]
 	path = dsh-core
 	url = https://github.com/dsh-plugin-fpl/dsh-core.git
+[submodule "dsh-visual-workshop"]
+	path = dsh-visual-workshop
+	url = https://github.com/dsh-plugin-fpl/dsh-visual-workshop.git
+[submodule "dsh-video-editor"]
+	path = dsh-video-editor
+	url = https://github.com/dsh-plugin-fpl/dsh-video-editor.git

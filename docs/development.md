@@ -49,3 +49,16 @@ python3 scripts/workspace.py check
 - 版本组合交付：先 `git check-ignore .local/<任务>/fresh`，再向该位置从 GitHub 递归克隆，运行结构检查，证明无需原工作目录也可还原。
 
 Python 可用 `uv run --no-project python` 替代；脚本无需第三方包。临时产物按根级规则落盘，测试夹具禁用真实用户 Git hooks 和签名，不修改全局配置。
+
+
+## 三服务组合验收
+
+分别运行 Core 与两个工坊自身的构建、测试和 `pnpm pack --pack-destination .runtime/packages`。随后从总工作区执行：
+
+```sh
+dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py
+```
+
+脚本使用 Core 自己维护的公开开发夹具，只替换供应商执行，不替换 Core WS、任务或资源实现。通过各工坊正常 CLI 建立隔离状态、会话、Core 配对及片段连接；使用真实 FFmpeg 与 Chrome，实际安装三份 tarball。所有输入、账号和素材均为隔离生成，秘密票据不输出。端口被其他实例占用时应先结束对应测试；不要清理真实服务或复用正式状态。
+
+报告不代替带真实供应商凭据的付费验收。各服务的正式生命周期与数据迁移仍按其自身文档执行。桌面安装通过正常 DSH 插件管理，不手改 profile 的持久配置。

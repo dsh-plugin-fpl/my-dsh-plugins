@@ -53,8 +53,12 @@ class WorkspaceTests(unittest.TestCase):
         self.commit(self.plugin)
         self.root = self.base / "workspace"
         self.init(self.root)
-        for name in ("README.md", "AGENTS.md", ".gitignore"):
+        for name in ("AGENTS.md", ".gitignore"):
             shutil.copy2(SOURCE / name, self.root / name)
+        # This fixture intentionally has one plugin; production README lists evolving apps.
+        (self.root / "README.md").write_text(
+            "# Fixture workspace\n\n[Core](dsh-core/README.md)\n[Development](docs/development.md)\n"
+        )
         for name in ("docs", "scripts"):
             shutil.copytree(SOURCE / name, self.root / name)
         (self.root / "tests/integration").mkdir(parents=True)

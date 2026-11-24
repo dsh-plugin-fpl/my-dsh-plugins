@@ -51,7 +51,7 @@ python3 scripts/workspace.py check
 
 ## 工坊运行与验收
 
-六个工坊分别在自己的目录 `pnpm setup`，按各自 README 的 `connect-core` 步骤连接 Core 0.4 统一账号，再 `pnpm start` / `pnpm open`。Core 9310，视觉 9360、剪辑 9361、演示 9362、思绪 9363、Galgame 9364、录音标注 9365。新四应用首次为空，原 FPL 数据不自动迁入；思绪官方内容须管理员显式导入。关闭 DSH 不停止服务。
+六个工坊分别在自己的目录 `pnpm setup`，按各自 README 的 `connect-core` 步骤连接 Core 0.5 统一账号，再 `pnpm start` / `pnpm open`。Core 9310，视觉 9360、剪辑 9361、演示 9362、思绪 9363、Galgame 9364、录音标注 9365。新四应用首次为空，原 FPL 数据不自动迁入；思绪官方内容须管理员显式导入。插件托管模式随 DSH 开关正常启停，manageService=false 时独立常驻。
 
 完整组合先构建 Core 和六个应用的插件 tarball，安装自身环境，再执行：
 
@@ -67,3 +67,5 @@ dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops_accounts.py
 ## 统一存储
 
 在 Core 看板顶部“存储”中设置统一数据根目录。默认建议 `~/Library/Application Support/DSH-FPL`；Core 与六工坊按自己的子目录保存数据，代码和运行环境仍由安装目录管理。已有数据通过预检、显式迁移和可恢复切换导入，原目录保留。旧 FPL 来源必须另外明确登记和选择，不会因新安装自动导入。参见 [Core 存储与迁移](dsh-core/docs/storage.md)。DSH 插件显示名称统一采用 `dsh-fpl-` 前缀，仓库、包 ID 与稳定应用 ID 保持兼容。
+
+七服务真实启停验收：构建并打包当前插件后运行 `node scripts/verify_plugin_lifecycle.mjs`，证据在 `.local/plugin-lifecycle/`。

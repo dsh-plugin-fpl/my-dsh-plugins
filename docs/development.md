@@ -62,3 +62,8 @@ dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py
 脚本使用 Core 自己维护的公开开发夹具，只替换供应商执行，不替换 Core WS、任务或资源实现。通过各工坊正常 CLI 建立隔离状态、会话、Core 配对及片段连接；使用真实 FFmpeg 与 Chrome，实际安装三份 tarball。所有输入、账号和素材均为隔离生成，秘密票据不输出。端口被其他实例占用时应先结束对应测试；不要清理真实服务或复用正式状态。
 
 报告不代替带真实供应商凭据的付费验收。各服务的正式生命周期与数据迁移仍按其自身文档执行。桌面安装通过正常 DSH 插件管理，不手改 profile 的持久配置。
+
+
+## 插件开关启停验收
+
+构建并打包七个当前版本、安装各自独立服务环境后，执行 `node scripts/verify_plugin_lifecycle.mjs`。脚本从当前 tarball 装入真实 Cordis，在隔离存储、账号和动态端口验证七服务的启动、关闭、重新启用、Core 依赖停机与恢复；不修改桌面 profile。证据放 `.local/plugin-lifecycle/`，隔离插件环境放 `.runtime/plugin-lifecycle/`。旧业务联动脚本显式设置 manageService=false，由其外层夹具启动和停止进程。

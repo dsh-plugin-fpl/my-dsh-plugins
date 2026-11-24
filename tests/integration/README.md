@@ -2,7 +2,7 @@
 
 当前基础能力验收由 [dsh-core 验证记录](../../dsh-core/docs/verification.md)维护，包含独立看板配置和任务、HTTP/WS 权限与恢复、DSH 连接层隔离安装、公开调用方示例与资源交接。
 
-当前组合为独立 Core 服务 + FPL 看板 + 可选 DSH 连接器。需要同时验证：关闭 DSH 后 Core 继续就绪、宿主回调任务明确中断并保留输出、重连恢复资源访问，以及独立运行包不依赖 FPL 源码或临时目录。
+当前组合为独立 Core 服务 + FPL 看板 + 可选 DSH 连接器。默认托管模式需要验证开关启停、Core 关闭时等待工坊退出、快速重启及失败恢复。显式 manageService=false 的常驻模式继续验证关闭 DSH 后服务保持就绪。两种模式均检查宿主回调中断、资源恢复，以及独立运行包不依赖 FPL 源码或临时目录。
 
 新增应用时，在这里登记“应用输入 → 公共能力任务 → 输出资源 → 应用接收”的场景。场景记录应用和 core 的版本、运行命令、结果及证据位置。提供方测试归各自仓库，联合场景验证真实交接。
 
@@ -51,3 +51,10 @@ Galgame 最终 68 项 Python 通过；完整 WAV → 实时模型设置 → Core
 
 
 最终远端复核：Core 全新克隆的锁定安装、完整连接器/看板构建、9 项 Node（空 Python 字节码缓存）、公开调用方独立编译通过；思绪 93 与 Galgame 68 项 Python 在最终远端组合再次通过。正式 Chrome `/apps` 实测恰有六张唯一 ready 应用卡片，六个头像完整加载、页面标题为“未来道具研究所”、无页面错误；证据 Core `.runtime/four-workshops-transition/final-cards-result.json` 与 `final-six-cards.png`。
+
+
+## 2026-11-24：插件托管生命周期与存储页面
+
+执行 `node scripts/verify_plugin_lifecycle.mjs`，使用当前七份 tarball、真实 Cordis 生命周期、提供方公开 CLI/API、隔离账号与动态端口。验证七服务启用就绪、工坊关闭退出、再次启用产生新进程、Core 关闭先停依赖、重新启用恢复六工坊、最终全部退出。六项结果通过，证据 `.local/plugin-lifecycle/1795491953367/report.json`。不使用真实业务数据或付费模型调用。旧 Harness 业务夹具显式使用 manageService=false，由外层测试拥有服务。
+
+Core 13 项 Node、227 项 Python、公开调用方编译通过；六工坊 Node 各 4 项及 Python 60/97/72/9/22/13 项通过。存储页完成卡片与内部任务标识不再展示，失败与恢复仍可见；明暗主题及 1440、800、390 宽度浏览器验收通过。

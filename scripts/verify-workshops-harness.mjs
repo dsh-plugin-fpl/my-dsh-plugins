@@ -85,11 +85,11 @@ await writeFile(
 );
 await writeFile(
   resolve(profile, "cordis.patch.yml"),
-  `- id: dsh-core\n  config:\n    endpoint: http://127.0.0.1:19310\n` +
+  `- id: dsh-core\n  config:\n    manageService: false\n    endpoint: http://127.0.0.1:19310\n` +
     ["visual-workshop", "video-editor"]
       .map(
         (route, i) =>
-          `- id: dsh-${route}\n  config:\n    endpoint: http://127.0.0.1:${19360 + i}\n    credentialFile: ${JSON.stringify(resolve(task, "dsh-" + route, "plugin.json"))}\n`,
+          `- id: dsh-${route}\n  config:\n    manageService: false\n    endpoint: http://127.0.0.1:${19360 + i}\n    credentialFile: ${JSON.stringify(resolve(task, "dsh-" + route, "plugin.json"))}\n`,
       )
       .join(""),
 );

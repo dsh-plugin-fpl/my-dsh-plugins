@@ -58,3 +58,28 @@ Galgame 最终 68 项 Python 通过；完整 WAV → 实时模型设置 → Core
 执行 `node scripts/verify_plugin_lifecycle.mjs`，使用当前七份 tarball、真实 Cordis 生命周期、提供方公开 CLI/API、隔离账号与动态端口。验证七服务启用就绪、工坊关闭退出、再次启用产生新进程、Core 关闭先停依赖、重新启用恢复六工坊、最终全部退出。六项结果通过，证据 `.local/plugin-lifecycle/1795491953367/report.json`。不使用真实业务数据或付费模型调用。旧 Harness 业务夹具显式使用 manageService=false，由外层测试拥有服务。
 
 Core 13 项 Node、227 项 Python、公开调用方编译通过；六工坊 Node 各 4 项及 Python 60/97/72/9/22/13 项通过。存储页完成卡片与内部任务标识不再展示，失败与恢复仍可见；明暗主题及 1440、800、390 宽度浏览器验收通过。
+# 托管安装候选验收
+
+新增入口为根目录 `testwithproof.config.ts` 和 `.testwithproof/catalog.yaml`。先暂存并构建七份候选 tarball，再运行 `python3 scripts/prepare_managed_harness.py`；它只安装到 `.runtime/plugin-managed-setup/`，不升级用户的 DSH。每次 Host 验收创建新的数据和环境目录，避免复用开发状态造成假通过。
+
+自动验收覆盖包内载荷/锁文件/界面、缺失可选 peer、两个固定 Host、首次安装和授权、原生工具读写/导出、CAS 和重复回执、取消/损坏环境修复、正常启停及浏览器布局。业务组合仍使用原有公开 CLI/HTTP/WS 和提供方测试夹具，外部模型与账号响应被模拟；真实供应商计费、Intel 实机与其他平台不计入通过范围。
+
+`twp --project "$PWD" --json run` 运行目录中的验收；`verify RUN_ID` 标记证据和人工审阅缺口，`export RUN_ID` 输出只读报告。运行产物通过忽略目录下的链接保存到 `.local/plugin-managed-setup/`，不要提交浏览器会话、安装回执、运行配置或私有日志。
+
+## 2026-11-24：托管安装候选的本地固定组合
+
+用户授权后在各插件 `main` 分别提交以下组合，随后更新总仓库 gitlink；未推送、发布或部署。候选保持既有包版本，正式发布仍需分配新版本并按最终包摘要重验。
+
+| 插件 | 固定提交 |
+| --- | --- |
+| dsh-core | `bd49f06c8a708b93eaed08815b5a4f679970b6f2` |
+| dsh-visual-workshop | `d959a7edc933515482724dcdcddd57688e816e3d` |
+| dsh-video-editor | `aab1240ac78f9d08978bb87004006d7d4b763af6` |
+| dsh-presentation-workshop | `1df4159b52eb1b85db5fc11b735410d090a3468b` |
+| dsh-thought-workshop | `531e7e98e97f9b1b928eb0f08267e41eb55758a9` |
+| dsh-galgame-workshop | `dec2a14b36561c5250c0f84013a8ca675ffc4c62` |
+| dsh-audio-annotation | `60637c6f1293a1567fba412413a63c2f05605a28` |
+
+最终自动运行 `2026-11-24T09-43-41-325Z-b59b5256` 的五项验收均通过：七份服务载荷与锁文件、桌面内置 DSH 0.2.2-rc.1 / Node 24.21.0、npm DSH 0.2.2-rc.5、七插件回归与七服务业务/界面联动。包括全新安装、浏览器批准授权、56 个原生工具注册与六工坊读写/导出、取消、虚拟环境解释器缺失后的修复，以及正常停服和重启后数据保留。Python 527 项、Node 46 项、工作区管理 12 项、Core 既有浏览器端到端 4 项通过。提交前仅清理 Core 公共供应商模块末尾多余空行，无行为变化。
+
+证据位于忽略的 `.local/plugin-managed-setup/`，运行记录、安装包和服务载荷均有摘要。真实 HTTP/WS、Chrome 与 FFmpeg 实际执行；模型供应商和外部账号响应采用公开测试夹具。未验证真实付费供应商或 Intel 实机。TestWithProof 步骤与文件/截图证据完整，但人工审阅尚未完成；运行期间总仓库规则文档更新导致版本指纹 current=false，不将自动通过表述为人工认可。七插件受验源码与所提交源码一致，除上述末尾空行清理外未改变实现。

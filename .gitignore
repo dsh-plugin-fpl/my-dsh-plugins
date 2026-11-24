@@ -15,3 +15,9 @@ node_modules/
 dist/
 coverage/
 .DS_Store
+
+.testwithproof/runs
+.testwithproof/lock
+.testwithproof/server.json
+.testwithproof/exports
+/.pnpm-store/

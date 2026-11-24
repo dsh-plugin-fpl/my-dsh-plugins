@@ -1,0 +1,46 @@
+version: 1
+features:
+  - id: distribution
+    title: 独立服务随插件分发
+    criteria:
+      - id: distribution.payloads
+        title: 七个载荷和公开契约
+        expected: 七份包的摘要、文件清单、平台和入口匹配，缺少可选 inventory 时 Core 可导入。
+        tests: [{executor: packages, id: distribution.payloads}]
+        evidence: [steps, file]
+        reviewRequired: false
+  - id: managed-setup
+    title: 两代真实 DSH 安装、授权与原生工具
+    description: Apple Silicon 实测；Intel 仅静态检查；真实付费供应商不在本轮范围。
+    criteria:
+      - id: managed-setup.current
+        title: 桌面内置 DSH 0.2.2-rc.1
+        expected: 七服务安装启动，证明授权，六工坊原生读写与资源交接，安装设置可见，正常停止。
+        tests: [{executor: hosts, id: managed-setup.current}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: managed-setup.next
+        title: npm DSH 0.2.2-rc.5 与 uv 缺失
+        expected: 缺 uv 时准备固定工具；缺 FFmpeg 可诊断；其余安装、授权、工具和页面与当前版一致。
+        tests: [{executor: hosts, id: managed-setup.next}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+  - id: protocol-regression
+    title: 提供方回归和异常路径
+    criteria:
+      - id: protocol-regression.all
+        title: 七插件构建与自动测试
+        expected: 授权、CAS、幂等、取消、传输清理、公开类型和既有业务测试通过；模拟依赖明确标识。
+        tests: [{executor: regressions, id: protocol-regression.all}]
+        evidence: [steps, file]
+        reviewRequired: false
+  - id: independent-workflows
+    title: 七服务业务与界面联动
+    description: 真实 HTTP/WS、Chrome、FFmpeg；仅供应商和外部账号由提供方公开夹具模拟。
+    criteria:
+      - id: independent-workflows.all
+        title: 账号隔离、导出、ASR 和跨工坊交接
+        expected: 公开组合验收通过，七服务页面无脚本/API 错误，宽屏、860 和 390 像素界面留下证据。
+        tests: [{executor: workflows, id: independent-workflows.all}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true

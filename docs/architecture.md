@@ -38,6 +38,8 @@ Python 直接提供独立 HTTP/WS 服务，负责供应商与 CLI 协议、本�
 
 dsh-core 分别生成独立服务运行包与 DSH 连接器 tarball。连接器安装到 Harness profile；服务可单独启动，也可由联合启动入口同时打开看板和 DSH。验收结果见 [插件验证记录](../dsh-core/docs/verification.md)。新应用加入后，按 [开发流程](development.md) 扩充组合验收。
 
+托管安装候选中，连接器 tarball 同时携带自身独立服务的生产载荷；独立运行包仍可使用。安装控制面归 Core 连接层，安装、启停与配对通过提供方公开启动器/CLI 完成，业务数据和任务仍由独立服务持有。工坊原生工具的操作白名单与完整契约归各提供方，Core 只适配 Host schema、登记、校验和流式资源导入。安装协议见 [Core 安装文档](../dsh-core/docs/managed-setup.md)，不在总仓库复制定义。
+
 
 ## 独立工坊
 

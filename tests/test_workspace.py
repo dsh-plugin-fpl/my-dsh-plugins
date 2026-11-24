@@ -48,7 +48,7 @@ class WorkspaceTests(unittest.TestCase):
             (self.plugin / name).write_text(content)
         docs = self.plugin / "docs"
         docs.mkdir()
-        for name in ("api.md", "scope.md", "verification.md", "storage.md"):
+        for name in ("api.md", "scope.md", "verification.md", "storage.md", "managed-setup.md"):
             (docs / name).write_text("# Public plugin documentation\n")
         self.commit(self.plugin)
         self.root = self.base / "workspace"

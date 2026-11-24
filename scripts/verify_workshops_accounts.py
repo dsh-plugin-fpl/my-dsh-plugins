@@ -31,7 +31,7 @@ APPS = [
     ["visual_workshop", "visual", "Visual", "视觉创作工坊", "fpl_visual", 9360],
     ["video_editor", "video", "Video", "视频剪辑工坊", "fpl_video", 9361],
 ]
-TASK = BASE / ".local/workshops-accounts"
+TASK = Path(os.environ.get("WORKSHOPS_TEST_BASE", BASE / ".local/workshops-accounts"))
 subprocess.run(
     ["git", "check-ignore", str(TASK)], cwd=BASE, check=True, stdout=subprocess.DEVNULL
 )
@@ -48,6 +48,7 @@ async def command(args, cwd):
     process = await asyncio.create_subprocess_exec(
         *map(str, args),
         cwd=cwd,
+        env={**os.environ, "PYTHONPATH": str(Path(cwd) / "python")},
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
     )
@@ -60,7 +61,7 @@ async def process(args, cwd, log, stack):
     file = log.open("w")
     log.chmod(0o600)
     process = await asyncio.create_subprocess_exec(
-        *map(str, args), cwd=cwd, stdout=file, stderr=asyncio.subprocess.STDOUT
+        *map(str, args), cwd=cwd, env={**os.environ, "PYTHONPATH": str(Path(cwd) / "python")}, stdout=file, stderr=asyncio.subprocess.STDOUT
     )
 
     async def stop():

@@ -1,0 +1,8 @@
+{
+  "name": "fpl-managed-acceptance",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "index.mjs",
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

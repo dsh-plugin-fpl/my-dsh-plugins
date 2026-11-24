@@ -69,3 +69,11 @@ dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops_accounts.py
 在 Core 看板顶部“存储”中设置统一数据根目录。默认建议 `~/Library/Application Support/DSH-FPL`；Core 与六工坊按自己的子目录保存数据，代码和运行环境仍由安装目录管理。已有数据通过预检、显式迁移和可恢复切换导入，原目录保留。旧 FPL 来源必须另外明确登记和选择，不会因新安装自动导入。参见 [Core 存储与迁移](dsh-core/docs/storage.md)。DSH 插件显示名称统一采用 `dsh-fpl-` 前缀，仓库、包 ID 与稳定应用 ID 保持兼容。
 
 七服务真实启停验收：构建并打包当前插件后运行 `node scripts/verify_plugin_lifecycle.mjs`，证据在 `.local/plugin-lifecycle/`。
+
+## 托管安装改造候选
+
+当前未发布候选保留七个独立服务，将每个服务的生产源码、锁文件和编译界面放入自身插件包。Core 的 **FPL 安装与连接** 设置负责首次环境准备、服务启停和浏览器确认授权；六工坊同时提供原生 DSH 工具与操作 Skill。目标 Host 为 `0.2.2-rc.1` 和 `0.2.2-rc.5`，首轮支持 macOS；安装和恢复约定归 [Core 文档](dsh-core/docs/managed-setup.md)。
+
+隔离验收工具包括 `scripts/stage_plugin_candidates.py`（按当前源码暂存构建候选）、`scripts/prepare_managed_harness.py`（安装桌面内置 rc.1 与 npm rc.5 的隔离 Host 及本地 tarball）、`scripts/verify_managed_plugins.py`（真实宿主控制和原生流程）。临时报告与截图写入 `.local/plugin-managed-setup/`，服务与测试 profile 位于 `.runtime/plugin-managed-setup/`。候选构建可复用开发依赖；真实托管安装则从包内载荷创建新 Python 环境，不引用源码环境。
+
+[TestWithProof 验收目录](.testwithproof/catalog.yaml) 区分真实 Host、提供方回归和模拟供应商的七服务联动。准备候选包和 Host 后，运行 `twp --project "$PWD" --json doctor` 与 `twp --project "$PWD" --json run`；随后用 `verify` 与 `export` 检查证据并导出报告。截图审阅由实际审阅者完成，自动测试不代替人工认可。当前改造按用户授权在各仓库 `main` 本地提交，并由总仓库 gitlink 固定组合；尚未推送或发布。正式发布前需分配新版本、提高最小 Core 依赖并对最终包摘要重验。

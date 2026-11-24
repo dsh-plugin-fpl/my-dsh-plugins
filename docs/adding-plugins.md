@@ -8,7 +8,7 @@
 
 ## 注册到工作区
 
-先确认插件首个提交已推送，再从总仓库根目录运行（将示例名称替换为实际仓库名）：
+新插件日常开发与提交使用该仓库的 `main`。先确认插件首个提交已推送到 `main`，再从总仓库根目录运行（将示例名称替换为实际仓库名）：
 
 ```sh
 git submodule add https://github.com/dsh-plugin-fpl/dsh-example.git dsh-example
@@ -26,4 +26,4 @@ python3 scripts/workspace.py check
 
 确认插件可独立克隆并运行其真实测试、缺少可选插件时反馈清楚、公开依赖声明完整。再从 GitHub 递归克隆整个工作区，确认新插件被还原、status 自动发现、check 通过；需要权限的仓库须明确说明访问要求。
 
-最后显式暂存 `.gitmodules`、新插件 gitlink 和相关文档，按 [开发流程](development.md) 提交与推送。独立包发布及生产部署需要另行确定流程，不属于子模块登记动作。
+最后显式暂存 `.gitmodules`、新插件 gitlink 和相关文档，在总仓库 `main` 按 [开发流程](development.md) 提交。推送总仓库前，确保被引用的插件提交已推送到插件 `main`；是否推送总仓库仍按用户授权执行。独立包发布及生产部署需要另行确定流程，不属于子模块登记动作。

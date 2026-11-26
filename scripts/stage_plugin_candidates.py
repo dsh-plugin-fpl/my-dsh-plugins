@@ -1,7 +1,7 @@
 """Stage current provider sources for isolated build/test without replacing live web assets."""
 
-import json
 import hashlib
+import json
 import shutil
 import subprocess
 from pathlib import Path
@@ -49,6 +49,15 @@ def main():
             link.parent.mkdir(parents=True, exist_ok=True)
             if not link.exists():
                 link.symlink_to(source / name, target_is_directory=True)
+        if source.name != "fpl-core":
+            # This command explicitly stages a joint-development combination.
+            # Package the staged Core snapshot, not an implicit sibling dependency.
+            link = destination / ".runtime/core-source"
+            if not link.is_symlink() and link.exists():
+                raise RuntimeError("Refusing to replace a non-link Core source: " + str(link))
+            if link.is_symlink():
+                link.unlink()
+            link.symlink_to(TARGET / "fpl-core", target_is_directory=True)
     print(TARGET)
 
 

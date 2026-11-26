@@ -67,3 +67,12 @@ fpl-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py
 ## 插件开关启停验收
 
 构建并打包七个当前版本、安装各自独立服务环境后，执行 `node scripts/verify_plugin_lifecycle.mjs`。脚本从当前 tarball 装入真实 Cordis，在隔离存储、账号和动态端口验证七服务的启动、关闭、重新启用、Core 依赖停机与恢复；不修改桌面 profile。证据放 `.local/plugin-lifecycle/`，隔离插件环境放 `.runtime/plugin-lifecycle/`。旧业务联动脚本显式设置 manageService=false，由其外层夹具启动和停止进程。
+
+
+## 公共 Core 依赖来源
+
+六工坊的独立安装入口为 `pnpm run setup --desktop`，按产品 `fpl-core.lock.json` 中的完整提交 SHA 自动获取 Core，使用各自 `.runtime/core-source` 统一连接 Python、公共 UI 与桌面运行库。`pnpm setup` 是 pnpm 自身命令，文档与脚本调用须明确写 `pnpm run setup`。
+
+本工作区联调使用 `pnpm run setup --desktop --core-source ../fpl-core`，不会改写提交中的锁文件。公共 Python 通过 editable 安装；公共 UI 更新后需重新运行该命令完成构建和复制。省略来源参数重跑即回到固定提交；切换前退出产品。
+
+更新 Core 固定版本时，先确认提交已经存在于提供方远程，再更新六工坊的 Core 锁文件；包版本或依赖变化时同时更新 uv/pnpm 锁文件。各工坊从无同级 Core 的隔离克隆执行安装和内嵌服务测试。`stage_plugin_candidates.py` 明确选择暂存的 Core 快照用于联合候选打包。

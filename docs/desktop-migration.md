@@ -8,12 +8,12 @@
 
 | 产品 | 提交 | macOS arm64 0.2.0 本机候选 |
 | --- | --- | --- |
-| 视觉创作工坊 | `0eb8ceb` | [视觉创作工坊.dmg](../visual-workshop/.runtime/desktop/0.2.0/视觉创作工坊.dmg) |
-| 视频剪辑工坊 | `3a7d6e3` | [视频剪辑工坊.dmg](../video-editor/.runtime/desktop/0.2.0/视频剪辑工坊.dmg) |
-| 演示工坊 | `620a416` | [演示工坊.dmg](../presentation-workshop/.runtime/desktop/0.2.0/演示工坊.dmg) |
-| 思绪工坊 | `36f708f` | [思绪工坊.dmg](../thought-workshop/.runtime/desktop/0.2.0/思绪工坊.dmg) |
-| Galgame 工坊 | `331a126` | [Galgame 工坊.dmg](../galgame-workshop/.runtime/desktop/0.2.0/Galgame 工坊.dmg) |
-| 录音标注工坊 | `b316d77` | [录音标注工坊.dmg](../audio-annotation/.runtime/desktop/0.2.0/录音标注工坊.dmg) |
+| 视觉创作工坊 | `0eb8ceb` | `../visual-workshop/.runtime/desktop/0.2.0/视觉创作工坊.dmg` |
+| 视频剪辑工坊 | `3a7d6e3` | `../video-editor/.runtime/desktop/0.2.0/视频剪辑工坊.dmg` |
+| 演示工坊 | `620a416` | `../presentation-workshop/.runtime/desktop/0.2.0/演示工坊.dmg` |
+| 思绪工坊 | `36f708f` | `../thought-workshop/.runtime/desktop/0.2.0/思绪工坊.dmg` |
+| Galgame 工坊 | `331a126` | `../galgame-workshop/.runtime/desktop/0.2.0/Galgame 工坊.dmg` |
+| 录音标注工坊 | `b316d77` | `../audio-annotation/.runtime/desktop/0.2.0/录音标注工坊.dmg` |
 
 Core 固定提交为 `63018da`，Python 分发包 `fpl-core==0.4.0`，公共 UI 与桌面运行包为 0.1.0。每份候选记录源码指纹及 wheel 摘要；候选目录不可覆盖。安装包采用本地 ad-hoc 签名，未做 Developer ID 公证或公开发布。
 
@@ -25,10 +25,13 @@ Core 固定提交为 `63018da`，Python 分发包 `fpl-core==0.4.0`，公共 UI 
 - 六份服务载荷各自在隔离目录按锁文件安装，无相邻 Core 开发源码仍可导入公共包。
 - 六产品的离线迁移测试通过正式接口创建项目，包含可编辑幻灯片、知识库、原始音频上传等产品数据，再核对导入后的项目及资源。另覆盖来源不变、快照冻结、中断重试、账号投影和目标新写入保留。收费模型供应商只用模拟夹具，真实任务与资源链路照常执行。
 
-最终运行：`2026-11-26T18-29-15-418Z-a5a47f95`（UTC 标识）；[只读验收报告](../.testwithproof/exports/2026-11-26T18-29-15-418Z-a5a47f95/index.html)。六桌面和视觉迁移的执行通过、证据完整，截图与迁移回执仍待用户人工审阅，没有代替用户认可。
+最终运行：`2026-11-26T18-35-45-414Z-deb5158b`（UTC 标识）；本机只读报告位于 `.testwithproof/exports/2026-11-26T18-35-45-414Z-deb5158b/index.html`。六桌面和视觉迁移的执行通过、证据完整，截图与迁移回执仍待用户人工审阅，没有代替用户认可。
 
 ## 范围与未覆盖项
 
 新桌面之间的跨工坊授权及 DSH 直接端点组合仍未验收，在目录中保留为未运行项。现有独立服务与 DSH 连接兼容入口继续保留。没有对用户真实业务数据执行导入、切换或覆盖，也没有正式安装到 Applications。活动任务退出提示已实现，但所有人工交互分支未逐一覆盖。产品内嵌模式展示产品数据位置，禁止调用旧独立 Core 的全局存储搬迁控制。
 
 开发环境在根目录更名后重新连接本地公开依赖。编辑器若仍打开旧目录，需要重新打开 `fpl-workspace`。
+
+
+根目录整体更名后，六个安装包与视觉旧状态迁移再次执行通过，七个 Python 环境和所有 Node 开发依赖已重连新路径，安装包源码指纹与推送版本一致。上表路径为本机构建产物，未纳入 Git；全新克隆应按各产品桌面文档重新构建，或使用正式发布时提供的附件。

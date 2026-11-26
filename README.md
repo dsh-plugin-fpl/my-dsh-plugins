@@ -1,14 +1,14 @@
-# my-dsh-plugins
+# fpl-workspace
 
-FPL 的 DeepSeek Harness 插件联合开发工作区：集中维护架构、Agent 开发规则、插件版本组合和联动验收，各插件保留独立仓库与发布能力。
+FPL 公共能力、独立工坊与 DeepSeek Harness 连接器的联合开发工作区：集中维护架构、Agent 开发规则、插件版本组合和联动验收，各插件保留独立仓库与发布能力。
 
 `dsh-core` 独立提供公共模型、Agent、本地模型、任务与资源服务及 FPL 看板。DSH 通过可选连接层接入，业务状态由独立服务持有。六个工坊各自提供独立服务，通过公开 Core 协议与受限工坊交接组合能力。
 
 ## 获取与初始化
 
 ```sh
-git clone --recurse-submodules https://github.com/dsh-plugin-fpl/my-dsh-plugins.git
-cd my-dsh-plugins
+git clone --recurse-submodules https://github.com/future-props-lab/fpl-workspace.git
+cd fpl-workspace
 python3 scripts/workspace.py status
 python3 scripts/workspace.py check
 ```
@@ -23,17 +23,19 @@ python3 scripts/workspace.py check
 
 脚本从自身位置定位工作区，可从其他目录调用。不会自动拉取最新版本、提交或推送；`status` 不执行 fetch。子模块清单唯一来源为 `.gitmodules`，每次总仓库提交的 gitlink 固定整套版本。
 
-## 插件
+GitHub 组织为 `future-props-lab`；现有本机目录、子模块路径、包名和应用 ID 暂时保留，避免仓库改名影响运行与数据定位。Core 库化属于后续迁移，当前运行结构仍以下表为准。
 
-| 插件 | 仓库 | 当前状态与职责 |
+## 仓库
+
+| 本地目录 | 仓库 | 当前状态与职责 |
 | --- | --- | --- |
-| dsh-core | [dsh-plugin-fpl/dsh-core](https://github.com/dsh-plugin-fpl/dsh-core) | 独立公共服务与 FPL 看板，包含模型、五种 Agent、本地模型、任务与资源；DSH 保留连接层 |
-| dsh-visual-workshop | [dsh-plugin-fpl/dsh-visual-workshop](https://github.com/dsh-plugin-fpl/dsh-visual-workshop) | 视觉创作工坊独立服务与原 FPL 界面，画布、设定、分镜、三维预演和 Core 生成；DSH 提供登记与工具 |
-| dsh-video-editor | [dsh-plugin-fpl/dsh-video-editor](https://github.com/dsh-plugin-fpl/dsh-video-editor) | 视频剪辑独立服务与原时间线界面，素材处理、FFmpeg 预览/导出、片段交接；DSH 提供登记与工具 |
-| dsh-presentation-workshop | [dsh-plugin-fpl/dsh-presentation-workshop](https://github.com/dsh-plugin-fpl/dsh-presentation-workshop) | 演示工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9362 |
-| dsh-thought-workshop | [dsh-plugin-fpl/dsh-thought-workshop](https://github.com/dsh-plugin-fpl/dsh-thought-workshop) | 思绪工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9363 |
-| dsh-galgame-workshop | [dsh-plugin-fpl/dsh-galgame-workshop](https://github.com/dsh-plugin-fpl/dsh-galgame-workshop) | Galgame 工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9364 |
-| dsh-audio-annotation | [dsh-plugin-fpl/dsh-audio-annotation](https://github.com/dsh-plugin-fpl/dsh-audio-annotation) | 录音标注工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9365 |
+| dsh-core | [future-props-lab/fpl-core](https://github.com/future-props-lab/fpl-core) | 独立公共服务与 FPL 看板，包含模型、五种 Agent、本地模型、任务与资源；DSH 保留连接层 |
+| dsh-visual-workshop | [future-props-lab/visual-workshop](https://github.com/future-props-lab/visual-workshop) | 视觉创作工坊独立服务与原 FPL 界面，画布、设定、分镜、三维预演和 Core 生成；DSH 提供登记与工具 |
+| dsh-video-editor | [future-props-lab/video-editor](https://github.com/future-props-lab/video-editor) | 视频剪辑独立服务与原时间线界面，素材处理、FFmpeg 预览/导出、片段交接；DSH 提供登记与工具 |
+| dsh-presentation-workshop | [future-props-lab/presentation-workshop](https://github.com/future-props-lab/presentation-workshop) | 演示工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9362 |
+| dsh-thought-workshop | [future-props-lab/thought-workshop](https://github.com/future-props-lab/thought-workshop) | 思绪工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9363 |
+| dsh-galgame-workshop | [future-props-lab/galgame-workshop](https://github.com/future-props-lab/galgame-workshop) | Galgame 工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9364 |
+| dsh-audio-annotation | [future-props-lab/audio-annotation](https://github.com/future-props-lab/audio-annotation) | 录音标注工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9365 |
 
 新增应用按 [插件接入流程](docs/adding-plugins.md) 登记，整套版本由总仓库固定。
 

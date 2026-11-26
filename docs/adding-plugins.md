@@ -2,7 +2,7 @@
 
 ## 独立仓库最低要求
 
-在 dsh-plugin-fpl 组织创建与职责对应的独立仓库；按实际发布策略选择可见性和许可证。先提交 README、AGENTS.md、忽略规则，再添加真实实现。README 说明功能成熟度、公开入口、依赖、配置与测试；未实现的部分明确写为规划，不添加虚假通过的占位测试。
+在 future-props-lab 组织创建与职责对应的独立仓库；按实际发布策略选择可见性和许可证。先提交 README、AGENTS.md、忽略规则，再添加真实实现。README 说明功能成熟度、公开入口、依赖、配置与测试；未实现的部分明确写为规划，不添加虚假通过的占位测试。
 
 插件必须支持独立克隆。基础开发规则直接保存在本仓库，涉及整套任务时引导回到 my-dsh-plugins；可参考 [Agent 指南模板](templates/plugin-agents.md)，将其中的包管理与测试命令替换为已实现入口。
 
@@ -11,7 +11,7 @@
 新插件日常开发与提交使用该仓库的 `main`。先确认插件首个提交已推送到 `main`，再从总仓库根目录运行（将示例名称替换为实际仓库名）：
 
 ```sh
-git submodule add https://github.com/dsh-plugin-fpl/dsh-example.git dsh-example
+git submodule add https://github.com/future-props-lab/dsh-example.git dsh-example
 python3 scripts/workspace.py status
 python3 scripts/workspace.py check
 ```

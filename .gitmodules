@@ -1,25 +1,25 @@
 [submodule "dsh-core"]
 	path = dsh-core
-	url = https://github.com/dsh-plugin-fpl/dsh-core.git
+	url = https://github.com/future-props-lab/fpl-core.git
 [submodule "dsh-visual-workshop"]
 	path = dsh-visual-workshop
-	url = https://github.com/dsh-plugin-fpl/dsh-visual-workshop.git
+	url = https://github.com/future-props-lab/visual-workshop.git
 [submodule "dsh-video-editor"]
 	path = dsh-video-editor
-	url = https://github.com/dsh-plugin-fpl/dsh-video-editor.git
+	url = https://github.com/future-props-lab/video-editor.git
 [submodule "dsh-presentation-workshop"]
 	path = dsh-presentation-workshop
-	url = https://github.com/dsh-plugin-fpl/dsh-presentation-workshop.git
+	url = https://github.com/future-props-lab/presentation-workshop.git
 	branch = main
 [submodule "dsh-thought-workshop"]
 	path = dsh-thought-workshop
-	url = https://github.com/dsh-plugin-fpl/dsh-thought-workshop.git
+	url = https://github.com/future-props-lab/thought-workshop.git
 	branch = main
 [submodule "dsh-galgame-workshop"]
 	path = dsh-galgame-workshop
-	url = https://github.com/dsh-plugin-fpl/dsh-galgame-workshop.git
+	url = https://github.com/future-props-lab/galgame-workshop.git
 	branch = main
 [submodule "dsh-audio-annotation"]
 	path = dsh-audio-annotation
-	url = https://github.com/dsh-plugin-fpl/dsh-audio-annotation.git
+	url = https://github.com/future-props-lab/audio-annotation.git
 	branch = main

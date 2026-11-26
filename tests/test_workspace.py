@@ -59,7 +59,7 @@ class WorkspaceTests(unittest.TestCase):
         (self.root / "README.md").write_text(
             "# Fixture workspace\n\n[Core](dsh-core/README.md)\n[Development](docs/development.md)\n"
         )
-        for name in ("docs", "scripts"):
+        for name in ("docs", "scripts", ".agent-workbench/rules"):
             shutil.copytree(SOURCE / name, self.root / name)
         (self.root / "tests/integration").mkdir(parents=True)
         shutil.copy2(SOURCE / "tests/integration/README.md",

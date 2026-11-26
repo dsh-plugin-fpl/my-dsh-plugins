@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import assert from "node:assert/strict";
 const root = resolve(import.meta.dirname, ".."), control = process.argv[2];
-const { chromium } = await import(pathToFileURL(root + "/dsh-core/web/node_modules/@playwright/test/index.mjs"));
+const { chromium } = await import(pathToFileURL(root + "/fpl-core/web/node_modules/@playwright/test/index.mjs"));
 const state = JSON.parse(await readFile(control + "/browser.json", "utf8"));
 const log = await readFile(control + "/host.log", "utf8");
 const hostUrl = /dsh web: (http:\/\/127\.0\.0\.1:\d+\/\?token=\S+)/.exec(log)?.[1];

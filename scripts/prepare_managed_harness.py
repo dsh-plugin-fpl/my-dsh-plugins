@@ -19,8 +19,8 @@ def main():
     # Do not silently install a tarball built before an installer fix made in
     # another active turn. Candidate builds are deliberate immutable snapshots.
     for name in ["src/runtime-manager.ts", "src/runtime-bootstrap.ts", "src/lifecycle.ts", "python/dsh_core_worker/cli.py"]:
-        source = ROOT / "dsh-core" / name
-        candidate = ROOT / ".runtime/plugin-managed-setup/candidates/dsh-core" / name
+        source = ROOT / "fpl-core" / name
+        candidate = ROOT / ".runtime/plugin-managed-setup/candidates/fpl-core" / name
         if source.read_bytes() != candidate.read_bytes():
             raise RuntimeError("Installer source changed; rebuild the candidate before acceptance: " + name)
     output = ROOT / ".local/plugin-managed-setup"

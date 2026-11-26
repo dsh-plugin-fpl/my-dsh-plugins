@@ -17,7 +17,7 @@ const names = [
   "dsh-galgame-workshop",
   "dsh-audio-annotation",
 ];
-const repos = names.map((name) => join(root, name));
+const repos = names.map((name) => join(root, name === "dsh-core" ? "fpl-core" : name.replace(/^dsh-/, "")));
 await execute(
   "git",
   ["check-ignore", ".local/plugin-lifecycle", ".runtime/plugin-lifecycle"],

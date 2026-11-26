@@ -57,14 +57,14 @@ class WorkspaceTests(unittest.TestCase):
             shutil.copy2(SOURCE / name, self.root / name)
         # This fixture intentionally has one plugin; production README lists evolving apps.
         (self.root / "README.md").write_text(
-            "# Fixture workspace\n\n[Core](dsh-core/README.md)\n[Development](docs/development.md)\n"
+            "# Fixture workspace\n\n[Core](fpl-core/README.md)\n[Development](docs/development.md)\n"
         )
         for name in ("docs", "scripts", ".agent-workbench/rules"):
             shutil.copytree(SOURCE / name, self.root / name)
         (self.root / "tests/integration").mkdir(parents=True)
         shutil.copy2(SOURCE / "tests/integration/README.md",
                      self.root / "tests/integration/README.md")
-        self.g(self.root, "submodule", "add", str(self.plugin), "dsh-core")
+        self.g(self.root, "submodule", "add", str(self.plugin), "fpl-core")
         self.commit(self.root)
 
     def g(self, repo, *args):
@@ -94,11 +94,11 @@ class WorkspaceTests(unittest.TestCase):
                 self.g(repo, "symbolic-ref", "--short", "HEAD"))
 
     def test_clean_check_and_bootstrap_preserve_existing_branch(self):
-        before = self.snapshot(self.root / "dsh-core")
+        before = self.snapshot(self.root / "fpl-core")
         self.assertIn("Check OK", self.cli("check"))
         self.cli("bootstrap")
         self.cli("bootstrap")
-        self.assertEqual(before, self.snapshot(self.root / "dsh-core"))
+        self.assertEqual(before, self.snapshot(self.root / "fpl-core"))
 
     def test_missing_module_then_repeatable_bootstrap(self):
         clone = self.base / "clone"
@@ -108,11 +108,11 @@ class WorkspaceTests(unittest.TestCase):
         self.cli("bootstrap", root=clone)
         self.cli("check", root=clone)
         self.cli("bootstrap", root=clone)
-        self.assertEqual(self.g(self.root / "dsh-core", "rev-parse", "HEAD"),
-                         self.g(clone / "dsh-core", "rev-parse", "HEAD"))
+        self.assertEqual(self.g(self.root / "fpl-core", "rev-parse", "HEAD"),
+                         self.g(clone / "fpl-core", "rev-parse", "HEAD"))
 
     def test_dirty_module_is_never_overwritten(self):
-        plugin = self.root / "dsh-core"
+        plugin = self.root / "fpl-core"
         target = plugin / "README.md"
         target.write_text("user changes\n")
         (plugin / "untracked.txt").write_text("keep me\n")
@@ -124,7 +124,7 @@ class WorkspaceTests(unittest.TestCase):
         self.assertIn("WARN", self.cli("check"))
 
     def test_drift_does_not_advance_to_latest_or_switch_branch(self):
-        plugin = self.root / "dsh-core"
+        plugin = self.root / "fpl-core"
         (plugin / "README.md").write_text("new version\n")
         self.commit(plugin)
         before = self.snapshot(plugin)
@@ -136,15 +136,15 @@ class WorkspaceTests(unittest.TestCase):
     def test_preflight_checks_all_modules_before_mutating_any(self):
         self.g(self.root, "submodule", "add", str(self.plugin), "dsh-second")
         self.commit(self.root)
-        self.g(self.root, "submodule", "deinit", "--force", "--", "dsh-core")
+        self.g(self.root, "submodule", "deinit", "--force", "--", "fpl-core")
         (self.root / "dsh-second/README.md").write_text("keep\n")
         self.cli("bootstrap", expected=1)
-        self.assertFalse((self.root / "dsh-core/.git").exists())
+        self.assertFalse((self.root / "fpl-core/.git").exists())
         self.assertEqual((self.root / "dsh-second/README.md").read_text(), "keep\n")
 
     def test_nonempty_missing_module_directory_is_preserved(self):
-        self.g(self.root, "submodule", "deinit", "--force", "--", "dsh-core")
-        target = self.root / "dsh-core/keep.txt"
+        self.g(self.root, "submodule", "deinit", "--force", "--", "fpl-core")
+        target = self.root / "fpl-core/keep.txt"
         target.write_text("keep\n")
         self.cli("bootstrap", expected=1)
         self.assertEqual(target.read_text(), "keep\n")
@@ -175,7 +175,7 @@ class WorkspaceTests(unittest.TestCase):
         target.write_text(target.read_text() + "\n[missing](missing.md)\n")
         self.assertIn("失效本地链接", self.cli("check", expected=1))
         target.write_text((SOURCE / "docs/architecture.md").read_text())
-        (self.root / "dsh-core/AGENTS.md").unlink()
+        (self.root / "fpl-core/AGENTS.md").unlink()
         self.assertIn("插件缺少基本文件", self.cli("check", expected=1))
 
     def test_unregistered_gitlink_and_unsafe_path_fail(self):
@@ -183,19 +183,19 @@ class WorkspaceTests(unittest.TestCase):
         original = config.read_text()
         config.write_text("")
         self.assertIn("未在 .gitmodules 登记", self.cli("check", expected=1))
-        config.write_text(original.replace("path = dsh-core", "path = ../outside"))
+        config.write_text(original.replace("path = fpl-core", "path = ../outside"))
         self.assertIn("根目录直接子目录", self.cli("bootstrap", expected=1))
 
     def test_interrupted_initialization_can_be_retried(self):
-        self.g(self.root, "submodule", "deinit", "--force", "--", "dsh-core")
+        self.g(self.root, "submodule", "deinit", "--force", "--", "fpl-core")
         # Missing local remote: no network, no data deletion, retry after restoring it.
-        metadata = self.root / ".git/modules/dsh-core"
+        metadata = self.root / ".git/modules/fpl-core"
         saved = self.root / ".git/modules/saved-core"
         metadata.rename(saved)
-        self.g(self.root, "config", "submodule.dsh-core.url", str(self.base / "absent"))
+        self.g(self.root, "config", "submodule.fpl-core.url", str(self.base / "absent"))
         self.cli("bootstrap", expected=1)
         saved.rename(metadata)
-        self.g(self.root, "config", "submodule.dsh-core.url", str(self.plugin))
+        self.g(self.root, "config", "submodule.fpl-core.url", str(self.plugin))
         self.cli("bootstrap")
         self.cli("check")
 

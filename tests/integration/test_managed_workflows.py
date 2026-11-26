@@ -14,7 +14,7 @@ def test_independent_workflows(twp_evidence):
     env = {**os.environ, "WORKSHOPS_WORKSPACE": str(ROOT / ".runtime/plugin-managed-setup/candidates"),
         "WORKSHOPS_TEST_BASE": str(OUT / "workflows"), "WORKSHOPS_UI_SCRIPT": str(ROOT / "scripts/verify-workshops-accounts-ui.mjs")}
     with log.open("w") as stream:
-        result = subprocess.run([str(ROOT / "dsh-core/.runtime/worker-venv/bin/python"), str(ROOT / "scripts/verify_workshops_accounts.py")],
+        result = subprocess.run([str(ROOT / "fpl-core/.runtime/worker-venv/bin/python"), str(ROOT / "scripts/verify_workshops_accounts.py")],
             cwd=ROOT, env=env, stdout=stream, stderr=subprocess.STDOUT, timeout=500)
     twp_evidence.attach(log, mime="text/plain")
     assert result.returncode == 0, log.read_text()[-3000:]

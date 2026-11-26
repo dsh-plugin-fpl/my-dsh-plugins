@@ -15,13 +15,13 @@ OUT = ROOT / ".local/plugin-managed-setup"
 @pytest.mark.twp("distribution.payloads")
 def test_seven_self_contained_payloads(twp_evidence):
     rows, core = [], None
-    for repo in sorted(CANDIDATES.glob("dsh-*")):
+    for repo in sorted((p for p in CANDIDATES.iterdir() if (p / "package.json").is_file() and not p.name.startswith("dsh-"))):
         meta = json.loads((repo / "package.json").read_text())
         archive = repo / ".runtime/packages" / (meta["name"].replace("@", "").replace("/", "-") + "-" + meta["version"] + ".tgz")
         with tarfile.open(archive) as package:
             names = package.getnames()
             assert not any(name.endswith("service-installation.json") for name in names)
-            prefix = "package/" + ("lib" if repo.name == "dsh-core" else "src") + "/runtime/"
+            prefix = "package/" + ("lib" if repo.name == "fpl-core" else "src") + "/runtime/"
             manifest = json.load(package.extractfile(prefix + "service.json"))
             payload = package.extractfile(prefix + "service.zip").read()
             assert hashlib.sha256(payload).hexdigest() == manifest["sha256"]
@@ -37,11 +37,11 @@ def test_seven_self_contained_payloads(twp_evidence):
                     assert not any(part in {".local", "node_modules", "__pycache__", "worker-venv", "venv"} for part in Path(name).parts)
                     assert hashlib.sha256(service.read(name)).hexdigest() == manifest["files"][name]
                 assert "python/" + manifest["module"] + "/cli.py" in service.namelist()
-                assert ("web/dist/index.html" if repo.name == "dsh-core" else ".runtime/web/index.html") in service.namelist()
-                assert ("python/uv.lock" if repo.name == "dsh-core" else "uv.lock") in service.namelist()
-                if repo.name == "dsh-core":
+                assert ("web/dist/index.html" if repo.name == "fpl-core" else ".runtime/web/index.html") in service.namelist()
+                assert ("python/uv.lock" if repo.name == "fpl-core" else "uv.lock") in service.namelist()
+                if repo.name == "fpl-core":
                     assert all("/brand/" not in name or name.endswith("/brand/icon.webp") for name in service.namelist())
-            if repo.name == "dsh-core":
+            if repo.name == "fpl-core":
                 core = (archive, meta)
         rows.append({"package": meta["name"], "version": meta["version"], "tarball_sha256": hashlib.sha256(archive.read_bytes()).hexdigest(),
             "payload_sha256": manifest["sha256"], "payload_bytes": len(payload),
@@ -69,7 +69,7 @@ def test_seven_self_contained_payloads(twp_evidence):
         target = modules / name
         target.parent.mkdir(parents=True, exist_ok=True)
         if not target.exists():
-            target.symlink_to(ROOT / "dsh-core/node_modules" / name, target_is_directory=True)
+            target.symlink_to(ROOT / "fpl-core/node_modules" / name, target_is_directory=True)
     assert not (modules / "@deepseek-ai/dsh-host-plugin-inventory").exists()
     result = subprocess.run(["node", "--input-type=module", "-e", "await import('@dsh-plugin-fpl/dsh-core'); console.log('core imported')"],
         cwd=consumer, capture_output=True, text=True)

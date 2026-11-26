@@ -16,7 +16,9 @@ def source_files(source):
 
 
 def main():
-    for source in sorted(ROOT.glob("dsh-*")):
+    from workspace import modules
+    for module in modules():
+        source = module.directory
         if not (source / "package.json").is_file():
             continue
         destination = TARGET / source.name
@@ -42,7 +44,7 @@ def main():
         if source_files(source) != before:
             raise RuntimeError("Source changed while staging; retry snapshot: " + source.name)
         previous.write_text(json.dumps(list(before)))
-        for name in ["node_modules", "web/node_modules", ".runtime/worker-venv" if source.name == "dsh-core" else ".runtime/venv"]:
+        for name in ["node_modules", "web/node_modules", ".runtime/worker-venv" if source.name == "fpl-core" else ".runtime/venv"]:
             link = destination / name
             link.parent.mkdir(parents=True, exist_ok=True)
             if not link.exists():

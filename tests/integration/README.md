@@ -1,6 +1,6 @@
 # 联动验收
 
-当前基础能力验收由 [dsh-core 验证记录](../../dsh-core/docs/verification.md)维护，包含独立看板配置和任务、HTTP/WS 权限与恢复、DSH 连接层隔离安装、公开调用方示例与资源交接。
+当前基础能力验收由 [dsh-core 验证记录](../../fpl-core/docs/verification.md)维护，包含独立看板配置和任务、HTTP/WS 权限与恢复、DSH 连接层隔离安装、公开调用方示例与资源交接。
 
 当前组合为独立 Core 服务 + FPL 看板 + 可选 DSH 连接器。默认托管模式需要验证开关启停、Core 关闭时等待工坊退出、快速重启及失败恢复。显式 manageService=false 的常驻模式继续验证关闭 DSH 后服务保持就绪。两种模式均检查宿主回调中断、资源恢复，以及独立运行包不依赖 FPL 源码或临时目录。
 
@@ -11,7 +11,7 @@
 
 ## 2026-11-23：Core 0.3.1 + 两工坊 0.1.0
 
-组合命令：`dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py`。执行前构建三个 tarball，安装各工坊自身环境、DSH CLI、FFmpeg、Chrome。脚本属于联合工作区，使用提供方的公开 CLI/API 与提供方维护的开发夹具，不导入其私有业务模块。
+组合命令：`fpl-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py`。执行前构建三个 tarball，安装各工坊自身环境、DSH CLI、FFmpeg、Chrome。脚本属于联合工作区，使用提供方的公开 CLI/API 与提供方维护的开发夹具，不导入其私有业务模块。
 
 通过场景：真实进程创建项目；FFmpeg 导入和处理 MP4；剪辑片段交接至视觉画布；读取目标自己的媒体原件；真实 Core WS 生成任务与资源分块发布图片；专用 Harness profile 安装三份 tarball；两应用中文目录与入口、图标可读；停止 Harness 后服务仍运行；Chrome 创建项目、项目列表明暗主题、1440 与 768 编辑页面，无页面异常或 HTTP 失败。
 

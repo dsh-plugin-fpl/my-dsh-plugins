@@ -75,12 +75,12 @@
    <div class="section-heading"><div><h2>统一位置，独立所有权</h2><p>存储根目录由 Core 协调，业务数据仍由各自提供方维护。</p></div></div>
    <div class="storage-grid"><div class="panel"><div class="directory"><div class="dir-root"><span data-icon="folder"></span><code>DSH-FPL /</code><span class="pill">可配置数据根</span></div><div class="tree"><b>core/</b>                           Core 账号与资源
 <b>workshops/</b>
-├─ dsh-visual-workshop/          视觉项目与生成
-├─ dsh-video-editor/            时间线与渲染
-├─ dsh-presentation-workshop/   幻灯片与素材
-├─ dsh-thought-workshop/        笔记与知识库
-├─ dsh-galgame-workshop/        剧情与资产
-└─ dsh-audio-annotation/        录音与标注</div></div><div class="ownership">目录并列不代表共享数据库。各工坊通过公开维护入口导入 / 导出自己的数据；协调器只记录计划、进度和回执。</div></div>
+├─ visual-workshop/          视觉项目与生成
+├─ video-editor/            时间线与渲染
+├─ presentation-workshop/   幻灯片与素材
+├─ thought-workshop/        笔记与知识库
+├─ galgame-workshop/        剧情与资产
+└─ audio-annotation/        录音与标注</div></div><div class="ownership">目录并列不代表共享数据库。各工坊通过公开维护入口导入 / 导出自己的数据；协调器只记录计划、进度和回执。</div></div>
    <div class="rules"><div class="panel rule"><h3>数据与运行环境分开</h3><p>未配置统一存储时沿用各服务自己的 <code>.runtime/</code>。托管运行环境位于 <code>DSH-FPL-Runtime/.runtime/</code>，按服务和载荷摘要隔离；数据仍位于统一数据根。临时验收证据放 <code>.local/</code>。</p></div><div class="panel rule"><h3>跨工坊复制受控原件</h3><p>传递资源引用、版本和摘要，通过短期授权读取原件，复制到目标自己的存储。账号与访问权限在服务端核验。</p></div><div class="panel rule"><h3>迁移先停写，再校验切换</h3><p>冻结计划 → 所属服务导出 → 复制校验 → 健康检查 → 提交切换 → 开放写入。开放写入后禁止自动回到旧副本。</p><div class="refs" id="storage-refs"></div></div></div></div>
    <div class="panel section-space"><div class="panel-head"><h2>公开契约与状态边界</h2><span class="pill">正式定义归提供方</span></div><div class="table-scroll"><table class="contract-table"><thead><tr><th>边界</th><th>交接内容</th><th>行为与恢复</th></tr></thead><tbody>
    <tr><td>身份</td><td>应用 ID、账号、code / 会话与授权</td><td>一次性 code 绑定应用 / 回调 / state；后端持续核验授权，撤权拒绝后续访问。</td></tr>

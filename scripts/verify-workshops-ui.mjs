@@ -4,7 +4,7 @@ const base = process.env.WORKSHOPS_WORKSPACE,
   task = process.env.WORKSHOPS_TEST_ROOT;
 const { chromium } = await import(
   pathToFileURL(
-    base + "/dsh-visual-workshop/web/node_modules/@playwright/test/index.mjs",
+    base + "/visual-workshop/web/node_modules/@playwright/test/index.mjs",
   ).href
 );
 const browser = await chromium.launch({ channel: "chrome", headless: true });

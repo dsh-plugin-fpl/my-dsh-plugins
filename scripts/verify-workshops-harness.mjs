@@ -46,19 +46,19 @@ const packages = {
     "file:" +
     resolve(
       base,
-      "dsh-core/.runtime/packages/dsh-plugin-fpl-dsh-core-0.3.1.tgz",
+      "fpl-core/.runtime/packages/dsh-plugin-fpl-dsh-core-0.3.1.tgz",
     ),
   "@dsh-plugin-fpl/dsh-visual-workshop":
     "file:" +
     resolve(
       base,
-      "dsh-visual-workshop/.runtime/packages/dsh-plugin-fpl-dsh-visual-workshop-0.1.0.tgz",
+      "visual-workshop/.runtime/packages/dsh-plugin-fpl-dsh-visual-workshop-0.1.0.tgz",
     ),
   "@dsh-plugin-fpl/dsh-video-editor":
     "file:" +
     resolve(
       base,
-      "dsh-video-editor/.runtime/packages/dsh-plugin-fpl-dsh-video-editor-0.1.0.tgz",
+      "video-editor/.runtime/packages/dsh-plugin-fpl-dsh-video-editor-0.1.0.tgz",
     ),
   "workshops-acceptance": "file:" + fixture,
 };

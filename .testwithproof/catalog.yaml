@@ -44,3 +44,56 @@ features:
         tests: [{executor: workflows, id: independent-workflows.all}]
         evidence: [steps, file, screenshot]
         reviewRequired: true
+
+  - id: embedded-desktop
+    title: Core 库化与独立桌面迁移
+    description: macOS Apple Silicon；按视觉、剪辑、演示、思绪、Galgame、录音标注顺序迁移。
+    criteria:
+      - id: embedded-desktop.visual
+        title: 视觉打包应用不依赖外部 Core
+        expected: 包内 Python 启动，自动建立产品会话，模型与集成页面可见，退出后后端正常停止。
+        tests: [{executor: desktop, id: embedded-desktop.visual}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: embedded-desktop.migration
+        title: 旧数据迁移与恢复
+        expected: 显式迁移保留项目、账号、引用与任务回执，重复导入和中断恢复不重复执行。
+        tests: [{executor: visualMigration, id: embedded-desktop.migration}]
+        evidence: [steps, file]
+        reviewRequired: true
+      - id: embedded-desktop.video
+        title: 视频剪辑工坊独立桌面
+        expected: 无外部 Core 启动，公共页面可用，项目入口直达本工坊列表，媒体工具随包交付并正常关闭。
+        tests: [{executor: desktopVideo, id: embedded-desktop.video}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: embedded-desktop.presentation
+        title: 演示工坊独立桌面
+        expected: 无外部 Core 启动，公共页面可用，项目入口直达本工坊列表，媒体工具随包交付并正常关闭。
+        tests: [{executor: desktopPresentation, id: embedded-desktop.presentation}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: embedded-desktop.thought
+        title: 思绪工坊独立桌面
+        expected: 无外部 Core 启动，公共页面可用，项目入口直达本工坊列表，媒体工具随包交付并正常关闭。
+        tests: [{executor: desktopThought, id: embedded-desktop.thought}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: embedded-desktop.galgame
+        title: Galgame 工坊独立桌面
+        expected: 无外部 Core 启动，公共页面可用，项目入口直达本工坊列表，媒体工具随包交付并正常关闭。
+        tests: [{executor: desktopGalgame, id: embedded-desktop.galgame}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: embedded-desktop.audio
+        title: 录音标注工坊独立桌面
+        expected: 无外部 Core 启动，公共页面可用，项目入口直达本工坊列表，媒体工具随包交付并正常关闭。
+        tests: [{executor: desktopAudio, id: embedded-desktop.audio}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: embedded-desktop.remaining
+        title: 跨工坊与 DSH 组合
+        expected: 五工坊独立桌面运行，跨工坊交接和 DSH 可选连接通过。
+        tests: []
+        evidence: [steps, file, screenshot]
+        reviewRequired: true

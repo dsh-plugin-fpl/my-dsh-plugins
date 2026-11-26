@@ -1,7 +1,7 @@
 import {readFile,writeFile} from 'node:fs/promises';
 import {pathToFileURL} from 'node:url';
 import assert from 'node:assert/strict';
-const base=process.env.WORKSHOPS_WORKSPACE,core=process.env.WORKSHOPS_CORE_REPO||base+'/dsh-core',task=process.env.WORKSHOPS_TEST_ROOT;
+const base=process.env.WORKSHOPS_WORKSPACE,core=process.env.WORKSHOPS_CORE_REPO||base+'/fpl-core',task=process.env.WORKSHOPS_TEST_ROOT;
 const {chromium}=await import(pathToFileURL(core+'/web/node_modules/@playwright/test/index.mjs'));
 const state=JSON.parse(await readFile(task+'/browser-state.json','utf8'));
 const browser=await chromium.launch({channel:'chrome',headless:true});

@@ -12,7 +12,7 @@ OUT = ROOT / ".local/plugin-managed-setup"
 @pytest.mark.twp("protocol-regression.all")
 def test_provider_regressions(twp_evidence):
     def check(repo):
-        core = repo.name == "dsh-core"
+        core = repo.name == "fpl-core"
         commands = [[str(repo / (".runtime/worker-venv/bin/python" if core else ".runtime/venv/bin/python")), "-m", "pytest",
             *( ["-c", "python/pyproject.toml", "python/tests"] if core else ["tests"] ), "-q"],
             ["node", "--test", *[str(p.relative_to(repo)) for p in (repo / "tests").glob("*.test.mjs")]]]
@@ -38,7 +38,7 @@ def test_provider_regressions(twp_evidence):
     for row in rows:
         twp_evidence.step(row["plugin"] + " Python and Node regressions", status="passed" if not row["python"] and not row["node"] else "failed")
     assert all(row["python"] == row["node"] == 0 for row in rows), rows
-    core = candidates / "dsh-core"
+    core = candidates / "fpl-core"
     result = subprocess.run(["node", "node_modules/typescript/bin/tsc", "--noEmit", "--strict", "--skipLibCheck", "--target", "es2023",
         "--module", "nodenext", "--moduleResolution", "nodenext", "examples/consumer.ts"], cwd=core, capture_output=True, text=True)
     assert result.returncode == 0, result.stdout + result.stderr

@@ -8,7 +8,7 @@ from uuid import uuid4
 import httpx
 
 BASE = Path(os.environ.get("WORKSHOPS_WORKSPACE", Path(__file__).resolve().parents[1]))
-CORE = Path(os.environ.get("WORKSHOPS_CORE_REPO", BASE / "dsh-core"))
+CORE = Path(os.environ.get("WORKSHOPS_CORE_REPO", BASE / "fpl-core"))
 APPS = [
     [
         "presentation_workshop",
@@ -188,7 +188,7 @@ async def main():
         apps = []
         for index, (appname, service, entry, title, pkg, _port) in enumerate(APPS):
             slug = "dsh-" + appname.replace("_", "-")
-            repo = BASE / slug
+            repo = BASE / appname.replace("_", "-")
             state = root / slug
             port = 19362 + index
             await command(

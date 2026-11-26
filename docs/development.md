@@ -56,7 +56,7 @@ Python 可用 `uv run --no-project python` 替代；脚本无需第三方包。�
 分别运行 Core 与两个工坊自身的构建、测试和 `pnpm pack --pack-destination .runtime/packages`。随后从总工作区执行：
 
 ```sh
-dsh-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py
+fpl-core/.runtime/worker-venv/bin/python scripts/verify_workshops.py
 ```
 
 脚本使用 Core 自己维护的公开开发夹具，只替换供应商执行，不替换 Core WS、任务或资源实现。通过各工坊正常 CLI 建立隔离状态、会话、Core 配对及片段连接；使用真实 FFmpeg 与 Chrome，实际安装三份 tarball。所有输入、账号和素材均为隔离生成，秘密票据不输出。端口被其他实例占用时应先结束对应测试；不要清理真实服务或复用正式状态。

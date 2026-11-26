@@ -41,7 +41,7 @@ const capabilities=await ctx.dshCore.capabilities();
 await writeFile(process.env.WORKSHOPS_HARNESS_REPORT,JSON.stringify({status:'connected',catalog:!!capabilities.generation_options}));
 })().catch(async e=>writeFile(process.env.WORKSHOPS_HARNESS_REPORT,JSON.stringify({status:'failed',message:e.message})));}`,
 );
-const core=process.env.WORKSHOPS_CORE_REPO||resolve(base,'dsh-core');
+const core=process.env.WORKSHOPS_CORE_REPO||resolve(base,'fpl-core');
 const applications=['presentation-workshop','thought-workshop','galgame-workshop','audio-annotation','visual-workshop','video-editor'];
 const packages={};
 for(const slug of ['core',...applications]){

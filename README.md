@@ -30,6 +30,7 @@ GitHub 组织为 `future-props-lab`；本机子仓库目录已与仓库名对齐
 | 本地目录 | 仓库 | 当前状态与职责 |
 | --- | --- | --- |
 | fpl-core | [future-props-lab/fpl-core](https://github.com/future-props-lab/fpl-core) | 独立公共服务与 FPL 看板，包含模型、五种 Agent、本地模型、任务与资源；DSH 保留连接层 |
+| dsh-fpl-visual-workshop | [future-props-lab/dsh-fpl-visual-workshop](https://github.com/future-props-lab/dsh-fpl-visual-workshop) | 独立 DSH Agent 连接器，只连接本地视觉工坊；项目绑定、生成、图片预览与候选选用；与旧视觉连接器互斥 |
 | visual-workshop | [future-props-lab/visual-workshop](https://github.com/future-props-lab/visual-workshop) | 视觉创作工坊独立服务与原 FPL 界面，画布、设定、分镜、三维预演和 Core 生成；DSH 提供登记与工具 |
 | video-editor | [future-props-lab/video-editor](https://github.com/future-props-lab/video-editor) | 视频剪辑独立服务与原时间线界面，素材处理、FFmpeg 预览/导出、片段交接；DSH 提供登记与工具 |
 | presentation-workshop | [future-props-lab/presentation-workshop](https://github.com/future-props-lab/presentation-workshop) | 演示工坊独立服务、原 FPL 界面、DSH 插件和 Core 统一账号；端口 9362 |

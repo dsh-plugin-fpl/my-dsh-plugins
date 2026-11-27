@@ -23,3 +23,6 @@
 	path = audio-annotation
 	url = https://github.com/future-props-lab/audio-annotation.git
 	branch = main
+[submodule "dsh-fpl-visual-workshop"]
+	path = dsh-fpl-visual-workshop
+	url = https://github.com/future-props-lab/dsh-fpl-visual-workshop.git

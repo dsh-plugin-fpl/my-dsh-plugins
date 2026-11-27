@@ -1,5 +1,14 @@
 version: 1
 features:
+  - id: file-browser
+    title: 六工坊旧版文件管理与素材选择
+    criteria:
+      - id: file-browser.rebuild
+        title: 非空文件页、目录操作及真实编辑器选用
+        expected: 六个工坊在隔离账号中展示真实文件和缩略图，紧凑工具栏、目录管理、预览、明暗与窄屏正常；项目附件与原生素材均可见，编辑器选用后结果保持，移除引用保留原件，未登录读取被拒绝。
+        tests: [{executor: fileBrowser, id: file-browser.rebuild}]
+        evidence: [steps, file, screenshot, trace]
+        reviewRequired: true
   - id: distribution
     title: 独立服务随插件分发
     criteria:

@@ -2,6 +2,7 @@ export default {
   name: "DSH independent services: managed setup candidate",
   root: ".",
   executors: {
+    fileBrowser: {type:'pytest',command:'visual-workshop/.runtime/venv/bin/python',args:['-m','pytest','tests/integration/test_file_browser_redesign.py','-q'],dependencies:'real',timeoutMs:1800000},
     cacheUpgrade: {type:'pytest',command:'visual-workshop/.runtime/venv/bin/python',args:['-m','pytest','tests/integration/test_desktop_recovery.py','-q','-k','http_cache_upgrade'],dependencies:'real',timeoutMs:240000},
     recoveryUi: {type:'pytest',command:'visual-workshop/.runtime/venv/bin/python',args:['-m','pytest','tests/integration/test_desktop_recovery.py','-q','-k','updated_desktop_ui'],dependencies:'real',timeoutMs:1200000},
     recoveryData: {type:'pytest',command:'visual-workshop/.runtime/venv/bin/python',args:['-m','pytest','tests/integration/test_desktop_recovery.py','-q','-k','real_migration_receipts'],dependencies:'real',timeoutMs:900000},

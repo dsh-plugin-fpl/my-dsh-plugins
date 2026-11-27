@@ -97,3 +97,31 @@ features:
         tests: []
         evidence: [steps, file, screenshot]
         reviewRequired: true
+
+  - id: desktop-recovery
+    title: 真实数据恢复与六工坊界面收尾
+    criteria:
+      - id: desktop-recovery.ui
+        title: 首页、品牌素材、菜单与添加连接
+        expected: 六个本机候选显示创意、集成、AI 能力三个区域，红莉栖素材正常，重复顶栏和 DSH 迁移按钮移除，飞书与 DSH 合并下拉，设置从应用菜单进入。
+        tests: [{executor: recoveryUi, id: desktop-recovery.ui}]
+        evidence: [steps, file, screenshot]
+        reviewRequired: true
+      - id: desktop-recovery.data
+        title: 真实项目和模型零丢失恢复
+        expected: 六个真实目标由提供方核验原有主键完整，数据库和外键通过；所有启用的本地模型已恢复，原始来源和桌面副本保留。
+        tests: [{executor: recoveryData, id: desktop-recovery.data}]
+        evidence: [steps, file]
+        reviewRequired: true
+      - id: desktop-recovery.identity
+        title: 历史账号映射与重启可见性
+        expected: 旧本机 owner 与原 Core 账号两种来源都保留原业务身份，重复修复不改变业务所有者，重启后原项目与资源可见。
+        tests: [{executor: visualMigration, id: embedded-desktop.migration}]
+        evidence: [steps, file]
+        reviewRequired: true
+      - id: desktop-recovery.cache-upgrade
+        title: 更新界面缓存并保留本地数据
+        expected: 保留旧占位图缓存的桌面状态升级后读取原素材，原账号身份与 localStorage 内容保持。
+        tests: [{executor: cacheUpgrade, id: desktop-recovery.cache-upgrade}]
+        evidence: [steps, file]
+        reviewRequired: false

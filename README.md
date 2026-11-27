@@ -57,7 +57,7 @@ GitHub 组织为 `future-props-lab`；本机子仓库目录已与仓库名对齐
 
 在本联合工作区开发当前 Core 源码时，显式使用 `pnpm run setup --desktop --core-source ../fpl-core`；省略 `--core-source` 重新安装即恢复固定版本。后端修改需重启产品，公共 UI 修改需重新 setup 构建；桌面打包入口位于产品的 `.runtime/core-source/scripts/package-desktop.py`。
 
-六个工坊分别在自己的目录 `pnpm run setup --core-source ../fpl-core`，按各自 README 的 `connect-core` 步骤连接 Core 0.5 统一账号，再 `pnpm start` / `pnpm open`。Core 默认免密进入本机所有者；右上角可选登录原 FPL 网站账号，用于创意工坊发布与下载安装到本机（不会切换本机数据）。Core 9310，视觉 9360、剪辑 9361、演示 9362、思绪 9363、Galgame 9364、录音标注 9365。新四应用首次为空，原 FPL 数据不自动迁入；思绪官方内容须管理员显式导入。插件托管模式随 DSH 开关正常启停，manageService=false 时独立常驻。
+六个工坊分别在自己的目录 `pnpm run setup --core-source ../fpl-core`，按各自 README 的 `connect-core` 步骤连接 Core 0.5 统一账号，再 `pnpm start` / `pnpm open`。Core 默认免密进入本机所有者；“创意”通过公共 Core 读取 GitHub 资源源，默认使用 fpl-resources；无需网站账号，可将 Skill 和集成配方导入当前应用的集成中心，副本默认停用。Core 9310，视觉 9360、剪辑 9361、演示 9362、思绪 9363、Galgame 9364、录音标注 9365。新四应用首次为空，原 FPL 数据不自动迁入；思绪官方内容须管理员显式导入。插件托管模式随 DSH 开关正常启停，manageService=false 时独立常驻。
 
 完整组合先构建 Core 和六个应用的插件 tarball，安装自身环境，再执行：
 

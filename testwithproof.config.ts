@@ -2,6 +2,9 @@ export default {
   name: "DSH independent services: managed setup candidate",
   root: ".",
   executors: {
+    cacheUpgrade: {type:'pytest',command:'visual-workshop/.runtime/venv/bin/python',args:['-m','pytest','tests/integration/test_desktop_recovery.py','-q','-k','http_cache_upgrade'],dependencies:'real',timeoutMs:240000},
+    recoveryUi: {type:'pytest',command:'visual-workshop/.runtime/venv/bin/python',args:['-m','pytest','tests/integration/test_desktop_recovery.py','-q','-k','updated_desktop_ui'],dependencies:'real',timeoutMs:1200000},
+    recoveryData: {type:'pytest',command:'visual-workshop/.runtime/venv/bin/python',args:['-m','pytest','tests/integration/test_desktop_recovery.py','-q','-k','real_migration_receipts'],dependencies:'real',timeoutMs:900000},
     desktopAudio: { type: "pytest", command: "audio-annotation/.runtime/venv/bin/python", args: ["-m", "pytest", "tests/integration/test_embedded_desktop.py", "-q", "-k", "audio"], dependencies: "real", timeoutMs: 180000 },
     desktopGalgame: { type: "pytest", command: "galgame-workshop/.runtime/venv/bin/python", args: ["-m", "pytest", "tests/integration/test_embedded_desktop.py", "-q", "-k", "galgame"], dependencies: "real", timeoutMs: 180000 },
     desktopThought: { type: "pytest", command: "thought-workshop/.runtime/venv/bin/python", args: ["-m", "pytest", "tests/integration/test_embedded_desktop.py", "-q", "-k", "thought"], dependencies: "real", timeoutMs: 180000 },
